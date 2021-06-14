@@ -1,32 +1,40 @@
 package web.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import web.model.User;
 
+import javax.jws.soap.SOAPBinding;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
+@Transactional
 public class UserDao {
 
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    private final EntityManager entityManager;
 
-    @Autowired
-    public UserDao(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public void addUser(User user) {
+        entityManager.persist(user);
     }
 
-//    public void addUser() {
-//        entityManager.persist(new User("Ivan", "Ivanov", "Ivanov@yandex.ru"));
-//    }
-
     public List<User> getAllUsers() {
-        //addUser();
-        //Query query = entityManager.createNamedQuery("User.getAll", User.class);
-        return null;
+        Query query = entityManager.createNamedQuery("User.getAll", User.class);
+        return query.getResultList();
+    }
+
+    public User getUser(long id) {
+        return getAllUsers().stream().filter(user -> user.getId() == id).findAny().orElse(null);
+    }
+
+    public void update(User user, long id) {
+        getUser(id).setFirstName(user.getFirstName());
+        getUser(id).setLastName(user.getLastName());
+        getUser(id).setEmail(user.getEmail());
+        entityManager.refresh(getUser(id));
     }
 }

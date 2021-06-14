@@ -2,10 +2,24 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Hello</title>
+    <title>Список пользователей</title>
+    <style>
+        #button {
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-<h1 th:text="${users}"></h1>
+<div>
+<th:block th:each="user : ${users}">
+    <a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.getFirstName()}"></a>
+    <br/>
+    <br/>
+</th:block>
 
+    <button>
+        <a href="/users/new" id="button">Добавить пользователя</a>
+    </button>
+</div>
 </body>
 </html>

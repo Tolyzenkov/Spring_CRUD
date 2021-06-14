@@ -1,9 +1,11 @@
 package web.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
+@NamedQuery(name = "User.getAll", query = "from User")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +15,7 @@ public class User {
     private String email;
 
     public User() {}
+
 
     public User(String firstName, String lastName, String email) {
         this.firstName = firstName;

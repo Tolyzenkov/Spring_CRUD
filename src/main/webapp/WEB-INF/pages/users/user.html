@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Пользователь</title>
+  <style>
+    #button {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <th:block th:each="user : ${user}">
+    <p th:text="${user.getId()}"></p>
+    <p th:text="${user.getFirstName()}"></p>
+    <p th:text="${user.getLastName()}"></p>
+    <p th:text="${user.getEmail()}"></p>
+  </th:block>
+
+
+</div>
+
+
+</body>
+</html>
