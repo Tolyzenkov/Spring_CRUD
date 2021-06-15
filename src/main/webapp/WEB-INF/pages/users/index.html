@@ -2,23 +2,52 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Список пользователей</title>
+    <title>Users list</title>
     <style>
-        #button {
+        .button {
             text-decoration: none;
+        }
+        div {
+            padding-bottom: 40px;
         }
     </style>
 </head>
 <body>
 <div>
-<th:block th:each="user : ${users}">
-    <a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.getFirstName()}"></a>
-    <br/>
-    <br/>
-</th:block>
+    <h2>Users</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <td>
+                <button>
+                <a th:href="@{users/{id}/edit(id=${user.id})}" class="button">Edit</a>
+            </button>
+            </td>
+            <td>
+                <form th:method="DELETE" th:action="@{users/{id}(id=${user.id})}">
+                    <input type="submit" value="Delete">
+                </form>
 
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div>
     <button>
-        <a href="/users/new" id="button">Добавить пользователя</a>
+        <a href="/users/new" class="button">Add new user</a>
     </button>
 </div>
 </body>

@@ -3,7 +3,6 @@ package web.dao;
 import org.springframework.stereotype.Component;
 import web.model.User;
 
-import javax.jws.soap.SOAPBinding;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -31,10 +30,14 @@ public class UserDao {
         return getAllUsers().stream().filter(user -> user.getId() == id).findAny().orElse(null);
     }
 
-    public void update(User user, long id) {
+    public void updateUser(User user, long id) {
         getUser(id).setFirstName(user.getFirstName());
         getUser(id).setLastName(user.getLastName());
         getUser(id).setEmail(user.getEmail());
         entityManager.refresh(getUser(id));
+    }
+
+    public void deleteUser(long id) {
+        entityManager.remove(getUser(id));
     }
 }

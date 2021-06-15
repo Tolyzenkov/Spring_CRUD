@@ -20,12 +20,6 @@ public class UsersController {
         return "users/index";
     }
 
-    @GetMapping("{id}")
-    public String oneUser(@PathVariable("id") long id, Model model) {
-        model.addAttribute("user", userDao.getUser(id));
-        return "users/user";
-    }
-
     @GetMapping("/new")
     public String newUser(Model model) {
         model.addAttribute("user", new User());
@@ -44,10 +38,16 @@ public class UsersController {
         return "users/edit";
     }
 
-    @PatchMapping("{/id}")
+    @PatchMapping("/{id}")
     public String update(Model model, @ModelAttribute("user") User user,
                          @PathVariable("id") long id) {
-        userDao.update(user, id);
+        userDao.updateUser(user, id);
+        return "redirect:/users";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") long id) {
+        userDao.deleteUser(id);
         return "redirect:/users";
     }
 }

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Редактирование пользователя</title>
+    <title>Edit user</title>
 </head>
 <body>
 <form th:method="PATCH" th:action="@{/users/{id} (id=${user.getId()})}" th:object="${user}">
@@ -18,7 +18,7 @@
         <input type="email" th:field="*{email}" id="email"/>
         <br/>
 
-        <input type="submit" value="Обновить">
+        <input type="submit" value="Edit">
 </form>
 </body>
 </html>

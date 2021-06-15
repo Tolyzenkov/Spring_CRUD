@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Добавление нового пользователя</title>
+    <title>Add user</title>
 </head>
 <body>
 <form th:method="POST" th:action="@{/users}" th:object="${user}">
@@ -19,7 +19,7 @@
         <input type="email" th:field="*{email}" id="email"/>
         <br/>
 
-        <input type="submit" value="Добавить">
+        <input type="submit" value="Add">
     </div>
 </form>
 </body>
